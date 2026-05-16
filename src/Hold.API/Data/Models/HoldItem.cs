@@ -1,6 +1,6 @@
 namespace Hold.API.Data.Models;
 
-class HoldItem {
+public class HoldItem {
   
   public Guid ID { get; init; } = Guid.NewGuid();
   public string Name { get; set; } = null!;
