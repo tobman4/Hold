@@ -8,4 +8,7 @@ var app = builder.Build();
 
 app.MapGet("/", () => "Hello World!");
 
-app.Run();
+Task.WaitAll(new [] {
+  app.RunAsync(),
+  app.PrepDBAsync()
+});

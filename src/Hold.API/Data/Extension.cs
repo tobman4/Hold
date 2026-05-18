@@ -20,4 +20,13 @@ public static class Extension
 
         return services;
     }
+
+    public static async Task PrepDBAsync(this IHost app) {
+      using var scope = app.Services.CreateAsyncScope();
+      var db = scope.ServiceProvider.GetRequiredService<HoldDbContext>();
+
+      var pending = await db.Database.GetPendingMigrationsAsync();
+      if(pending.Count() > 0)
+        await db.Database.MigrateAsync();
+    }
 }
