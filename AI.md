@@ -20,3 +20,7 @@ You must override standard .NET formatting conventions and force this style acro
 4. **Empty Blocks**: For empty blocks (such as empty constructors or placeholder methods), place the closing brace on the next line.
 
 5. **Indentation**: Use 2 spaces for indentation within the blocks.
+
+## API Documentation
+
+Whenever you add or modify a new API endpoint, you must document it in the `endpoints.md` file located in the root directory.
