@@ -1,0 +1,45 @@
+@page
+@model Hold.API.Pages.Accounts.IndexModel
+
+@{
+  ViewData["Title"] = "Accounts";
+}
+
+<h1>Accounts</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Balance</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    @foreach (var account in Model.Accounts) {
+      <tr>
+        <td>@account.Name</td>
+        <td>@account.Balance</td>
+        <td>
+          <a href="/Accounts/Details/@account.ID">View Details</a>
+        </td>
+      </tr>
+    }
+  </tbody>
+</table>
+
+<hr />
+
+<h2>Add New Account</h2>
+
+<form method="post">
+  <div class="form-group">
+    <label for="Name">Account Name</label>
+    <input type="text" id="Name" name="Name" required />
+  </div>
+  <div class="form-group">
+    <label for="StartingBalance">Starting Balance</label>
+    <input type="number" step="0.01" id="StartingBalance" name="StartingBalance" value="0.00" />
+  </div>
+  <button type="submit">Create Account</button>
+</form>
