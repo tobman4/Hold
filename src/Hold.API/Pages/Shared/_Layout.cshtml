@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>@ViewData["Title"] - Hold.API</title>
+  <style>
+    body { font-family: sans-serif; margin: 0; padding: 0; }
+    header { background-color: #f8f9fa; padding: 1rem; border-bottom: 1px solid #dee2e6; }
+    nav a { margin-right: 1rem; text-decoration: none; color: #007bff; }
+    nav a:hover { text-decoration: underline; }
+    main { padding: 1rem; max-width: 800px; margin: 0 auto; }
+    table { width: 100%; border-collapse: collapse; margin-top: 1rem; }
+    th, td { border: 1px solid #dee2e6; padding: 0.5rem; text-align: left; }
+    th { background-color: #f8f9fa; }
+    .form-group { margin-bottom: 1rem; }
+    label { display: block; margin-bottom: 0.5rem; }
+    input[type="text"], input[type="number"] { width: 100%; padding: 0.5rem; box-sizing: border-box; }
+    button { padding: 0.5rem 1rem; background-color: #007bff; color: white; border: none; cursor: pointer; }
+    button:hover { background-color: #0056b3; }
+  </style>
+</head>
+<body>
+  <header>
+    <nav>
+      <a href="/">Home</a>
+      <a href="/Accounts">Accounts</a>
+    </nav>
+  </header>
+  <main role="main">
+    @RenderBody()
+  </main>
+</body>
+</html>

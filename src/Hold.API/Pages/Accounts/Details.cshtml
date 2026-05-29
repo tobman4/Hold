@@ -1,0 +1,56 @@
+@page "{id:guid}"
+@model Hold.API.Pages.Accounts.DetailsModel
+
+@{
+  ViewData["Title"] = "Account Details";
+}
+
+@if (Model.Account == null) {
+  <p>Account not found.</p>
+} else {
+  <h1>Account: @Model.Account.Name</h1>
+  <p><strong>Current Balance:</strong> @Model.Account.Balance</p>
+
+  <hr />
+
+  <h2>Make a Transaction</h2>
+  <form method="post">
+    <input type="hidden" name="AccountId" value="@Model.Account.ID" />
+    <div class="form-group">
+      <label for="TransactionType">Action</label>
+      <select id="TransactionType" name="TransactionType">
+        <option value="Deposit">Deposit</option>
+        <option value="Withdraw">Withdraw</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="Amount">Amount</label>
+      <input type="number" step="0.01" id="Amount" name="Amount" required />
+    </div>
+    <button type="submit">Submit</button>
+  </form>
+
+  <hr />
+
+  <h2>Transactions History</h2>
+  @if (Model.Account.Transitions.Any()) {
+    <table>
+      <thead>
+        <tr>
+          <th>Type</th>
+          <th>Amount</th>
+        </tr>
+      </thead>
+      <tbody>
+        @foreach (var tx in Model.Account.Transitions) {
+          <tr>
+            <td>@tx.Type</td>
+            <td>@tx.Ammount</td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  } else {
+    <p>No transactions yet.</p>
+  }
+}
