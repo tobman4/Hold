@@ -8,4 +8,23 @@ public class HoldDbContext : DbContext {
   }
 
   public DbSet<HoldItem> HoldItems { get; set; } = null!;
+  public DbSet<BankAccount> Accounts { get; set; } = null!;
+  public DbSet<BankTransaction> Transitions { get; set; } = null!;
+
+  protected override void OnModelCreating(ModelBuilder modelBuilder) {
+
+    modelBuilder.Entity<BankAccount>()
+      .ToTable("Account");
+
+    modelBuilder.Entity<BankAccount>()
+      .HasKey(e => e.ID);
+
+    modelBuilder.Entity<BankAccount>()
+      .HasAlternateKey(e => e.Name);
+
+    modelBuilder.Entity<BankAccount>()
+      .HasMany(e => e.Transitions)
+      .WithOne(e => e.Account)
+      .HasForeignKey(e => e.AccountID);
+  }
 }
