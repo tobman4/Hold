@@ -7,16 +7,14 @@ namespace Hold.API.Endpoints;
 
 
 static class BankEndpoint {
-  public static WebApplication MapBankEndpoints(this WebApplication app) {
-    var group = app.MapGroup("/bank");
+  public static T MapBankEndpoints<T>(this T app) where T : IEndpointRouteBuilder {
+    app.MapGet("", GetAll);
+    app.MapPost("", AddAccount);
 
-    group.MapGet("", GetAll);
-    group.MapPost("", AddAccount);
+    app.MapGet("{id}", GetAccount);
+    app.MapPut("{id}", Update);
 
-    group.MapGet("{id}", GetAccount);
-    group.MapPut("{id}", Update);
-
-    group.MapGet("{id}/transitions", GetTransitions);
+    app.MapGet("{id}/transitions", GetTransitions);
 
 
     return app;

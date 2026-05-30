@@ -8,14 +8,12 @@ using Microsoft.AspNetCore.Routing;
 namespace Hold.API.Endpoints;
 
 public static class HoldItemEndpoints {
-  public static WebApplication MapHoldItemEndpoints(this WebApplication app) {
-    var group = app.MapGroup("/hold");
-
-    group.MapGet("/", GetHoldItems);
-    group.MapGet("/{id:guid}", GetHoldItem);
-    group.MapPost("/", CreateHoldItem);
-    group.MapPut("/{id:guid}", UpdateHoldItem);
-    group.MapDelete("/{id:guid}", DeleteHoldItem);
+  public static T MapHoldItemEndpoints<T>(this T app) where T : IEndpointRouteBuilder {
+    app.MapGet("/", GetHoldItems);
+    app.MapGet("/{id:guid}", GetHoldItem);
+    app.MapPost("/", CreateHoldItem);
+    app.MapPut("/{id:guid}", UpdateHoldItem);
+    app.MapDelete("/{id:guid}", DeleteHoldItem);
 
     return app;
   }
