@@ -39,25 +39,25 @@ static class BankEndpoint {
     return Results.Ok(acc.Transitions.ToArray());
   }
 
-  private static async Task<IResult> AddAccount([FromServices]Bank bank, [FromQuery]string name) {
+  private static async Task<IResult> AddAccount([FromServices]Bank bank, [FromQuery]string name, [FromQuery]float startingAmmount = 0.0f, [FromQuery]string description = "Initial Deposit") {
     if(string.IsNullOrWhiteSpace(name))
       return Results.BadRequest("Bad account name");
 
-    var acc = await bank.AddAccountAsync(name);
+    var acc = await bank.AddAccountAsync(name, startingAmmount, description);
 
     await bank.SaveAsync();
     return Results.Ok(acc);
   }
 
-  private static IResult Update([FromServices]Bank bank, Guid id, float ammout) {
+  private static IResult Update([FromServices]Bank bank, Guid id, [FromQuery]float ammout, [FromQuery]string description = "") {
     if(bank.TryGetAccount(id) is not BankAccount acc)
       return Results.NotFound();
 
     if(ammout < 0.0f)
-      acc.Withdraw(Math.Abs(ammout));
+      acc.Withdraw(Math.Abs(ammout), description);
 
     else if(ammout > 0.0f)
-      acc.Deposit(ammout);
+      acc.Deposit(ammout, description);
 
     bank.Save();
     return Results.Ok(acc);
