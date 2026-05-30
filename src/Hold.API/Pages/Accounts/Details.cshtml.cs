@@ -18,7 +18,7 @@ public class DetailsModel(Bank bank) : PageModel {
     return Page();
   }
 
-  public async Task<IActionResult> OnPostAsync(Guid accountId, string transactionType, float amount) {
+  public async Task<IActionResult> OnPostAsync(Guid accountId, string transactionType, float amount, string description = "") {
     var account = _bank.TryGetAccount(accountId);
     if (account == null) {
       return NotFound();
@@ -26,9 +26,9 @@ public class DetailsModel(Bank bank) : PageModel {
 
     try {
       if (transactionType == "Deposit") {
-        account.Deposit(amount);
+        account.Deposit(amount, description);
       } else if (transactionType == "Withdraw") {
-        account.Withdraw(amount);
+        account.Withdraw(amount, description);
       }
 
       await _bank.SaveAsync();

@@ -27,6 +27,10 @@
       <label for="Amount">Amount</label>
       <input type="number" step="0.01" id="Amount" name="Amount" required />
     </div>
+    <div class="form-group">
+      <label for="Description">Description</label>
+      <input type="text" id="Description" name="Description" />
+    </div>
     <button type="submit">Submit</button>
   </form>
 
@@ -39,6 +43,7 @@
         <tr>
           <th>Type</th>
           <th>Amount</th>
+          <th>Description</th>
         </tr>
       </thead>
       <tbody>
@@ -46,6 +51,7 @@
           <tr>
             <td>@tx.Type</td>
             <td>@tx.Ammount</td>
+            <td>@tx.Description</td>
           </tr>
         }
       </tbody>

@@ -14,12 +14,12 @@ public class IndexModel(Bank bank) : PageModel {
     Accounts = _bank.Accounts;
   }
 
-  public async Task<IActionResult> OnPostAsync(string name, float startingBalance) {
+  public async Task<IActionResult> OnPostAsync(string name, float startingBalance, string description = "Initial Deposit") {
     if (string.IsNullOrWhiteSpace(name)) {
       return RedirectToPage();
     }
 
-    await _bank.AddAccountAsync(name, startingBalance);
+    await _bank.AddAccountAsync(name, startingBalance, description);
     await _bank.SaveAsync();
 
     return RedirectToPage();
