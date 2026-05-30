@@ -14,13 +14,13 @@ public class Bank(
 
   public IEnumerable<BankAccount> Accounts => _db.Accounts.ToArray();
 
-  public async Task<BankAccount> AddAccountAsync(string name, float startingAmmount = 0.0f) {
+  public async Task<BankAccount> AddAccountAsync(string name, float startingAmmount = 0.0f, string description = "Initial Deposit") {
     var account = (await _db.Accounts.AddAsync(new BankAccount {
       Name = name
     })).Entity;
 
     if(startingAmmount != 0.0f)
-      account.Deposit(startingAmmount);
+      account.Deposit(startingAmmount, description);
 
     return account;
   }

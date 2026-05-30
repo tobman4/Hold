@@ -1,3 +1,5 @@
+using System.Text.Json.Serialization;
+
 namespace Hold.API.Data.Models;
 
 public class BankTransaction {
@@ -6,6 +8,8 @@ public class BankTransaction {
 
   public float Ammount { get; init; }
   public string Type { get; init; } = string.Empty;
+  public string Description { get; init; } = string.Empty;
 
+  [JsonIgnore]
   public BankAccount Account { get; init; } = null!;
 }
