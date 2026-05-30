@@ -1,6 +1,7 @@
 using Hold.API.Data.Models;
 using Hold.API.Services;
 using Microsoft.AspNetCore.Mvc;
+using System.Text;
 
 
 namespace Hold.API.Endpoints;
@@ -15,6 +16,7 @@ static class BankEndpoint {
     app.MapPut("{id}", Update);
 
     app.MapGet("{id}/transitions", GetTransitions);
+    app.MapGet("{id}/export", ExportTransactions);
 
 
     return app;
@@ -35,6 +37,20 @@ static class BankEndpoint {
       return Results.NotFound();
     
     return Results.Ok(acc.Transitions.ToArray());
+  }
+
+  private static IResult ExportTransactions([FromServices]Bank bank, Guid id) {
+    if (bank.TryGetAccount(id) is not BankAccount acc)
+      return Results.NotFound();
+
+    var csv = new StringBuilder();
+    csv.AppendLine("ID,Amount,Type,Description");
+
+    foreach (var t in acc.Transitions) {
+      csv.AppendLine($"{t.ID},{t.Ammount},{t.Type},\"{t.Description.Replace("\"", "\"\"")}\"");
+    }
+
+    return Results.File(Encoding.UTF8.GetBytes(csv.ToString()), "text/csv", $"account_{id}_history.csv");
   }
 
   private static async Task<IResult> AddAccount([FromServices]Bank bank, [FromQuery]string name, [FromQuery]float startingAmmount = 0.0f, [FromQuery]string description = "Initial Deposit") {
