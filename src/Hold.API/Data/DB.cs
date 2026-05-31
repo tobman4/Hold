@@ -10,6 +10,7 @@ public class HoldDbContext : DbContext {
   public DbSet<HoldItem> HoldItems { get; set; } = null!;
   public DbSet<BankAccount> Accounts { get; set; } = null!;
   public DbSet<BankTransaction> Transactions { get; set; } = null!;
+  public DbSet<Post> Posts { get; set; } = null!;
 
   protected override void OnModelCreating(ModelBuilder modelBuilder) {
 

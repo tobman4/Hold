@@ -25,6 +25,10 @@ app.MapGroup("/bank")
    .MapBankEndpoints()
    .WithFeatureGate(FeatureFlags.Bank);
 
+app.MapGroup("/posts")
+   .MapPostEndpoints()
+   .WithFeatureGate(FeatureFlags.Posts);
+
 Task.WaitAll(new [] {
   app.RunAsync(),
   app.PrepDBAsync()
