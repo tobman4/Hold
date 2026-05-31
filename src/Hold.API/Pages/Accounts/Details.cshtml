@@ -10,6 +10,7 @@
 } else {
   <h1>Account: @Model.Account.Name</h1>
   <p><strong>Current Balance:</strong> @Model.Account.Balance</p>
+  <p><a href="/bank/@Model.Account.ID/export">Export Transactions to CSV</a></p>
 
   <hr />
 
@@ -37,7 +38,7 @@
   <hr />
 
   <h2>Transactions History</h2>
-  @if (Model.Account.Transitions.Any()) {
+  @if (Model.Account.Transactions.Any()) {
     <table>
       <thead>
         <tr>
@@ -47,10 +48,10 @@
         </tr>
       </thead>
       <tbody>
-        @foreach (var tx in Model.Account.Transitions) {
+        @foreach (var tx in Model.Account.Transactions) {
           <tr>
             <td>@tx.Type</td>
-            <td>@tx.Ammount</td>
+            <td>@tx.Amount</td>
             <td>@tx.Description</td>
           </tr>
         }

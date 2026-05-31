@@ -7,17 +7,17 @@ public class BankAccount {
 
   public float Balance { get; set; } = 0.0f;
 
-  public ICollection<BankTransaction> Transitions = new List<BankTransaction>();
+  public ICollection<BankTransaction> Transactions { get; set; } = new List<BankTransaction>();
 
 
-  public void Deposit(float ammount, string description = "") {
-    if(ammount <= 0)
+  public void Deposit(float amount, string description = "") {
+    if(amount <= 0)
       throw new ArgumentException();
 
-    Balance += ammount;
-    Transitions.Add(new BankTransaction {
+    Balance += amount;
+    Transactions.Add(new BankTransaction {
       AccountID = this.ID,
-      Ammount = ammount,
+      Amount = amount,
       Type = "Deposit",
       Description = description
     });
@@ -25,14 +25,14 @@ public class BankAccount {
   }
 
 
-  public void Withdraw(float ammount, string description = "") {
-    if(ammount <= 0)
+  public void Withdraw(float amount, string description = "") {
+    if(amount <= 0)
       throw new ArgumentException();
 
-    Balance -= ammount;
-    Transitions.Add(new BankTransaction {
+    Balance -= amount;
+    Transactions.Add(new BankTransaction {
       AccountID = this.ID,
-      Ammount = ammount,
+      Amount = amount,
       Type = "Withdraw",
       Description = description
     });

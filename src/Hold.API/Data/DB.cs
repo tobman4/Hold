@@ -9,7 +9,7 @@ public class HoldDbContext : DbContext {
 
   public DbSet<HoldItem> HoldItems { get; set; } = null!;
   public DbSet<BankAccount> Accounts { get; set; } = null!;
-  public DbSet<BankTransaction> Transitions { get; set; } = null!;
+  public DbSet<BankTransaction> Transactions { get; set; } = null!;
 
   protected override void OnModelCreating(ModelBuilder modelBuilder) {
 
@@ -23,7 +23,7 @@ public class HoldDbContext : DbContext {
       .HasAlternateKey(e => e.Name);
 
     modelBuilder.Entity<BankAccount>()
-      .HasMany(e => e.Transitions)
+      .HasMany(e => e.Transactions)
       .WithOne(e => e.Account)
       .HasForeignKey(e => e.AccountID);
   }

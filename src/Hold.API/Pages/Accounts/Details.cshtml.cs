@@ -25,9 +25,9 @@ public class DetailsModel(Bank bank) : PageModel {
     }
 
     try {
-      if (transactionType == "Deposit") {
+      if (string.Equals(transactionType, "Deposit", StringComparison.OrdinalIgnoreCase)) {
         account.Deposit(amount, description);
-      } else if (transactionType == "Withdraw") {
+      } else if (string.Equals(transactionType, "Withdraw", StringComparison.OrdinalIgnoreCase)) {
         account.Withdraw(amount, description);
       }
 
